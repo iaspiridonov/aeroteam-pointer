@@ -1,0 +1,81 @@
+.section {
+    padding-bottom: 35px;
+    padding-top: 35px;
+
+    @media (min-width: $lg) {
+        padding-bottom: 70px;
+        padding-top: 70px;
+    }
+
+    &--weekend {
+        background-image: url('../img/weekend-bg.png');
+        background-repeat: no-repeat;
+        background-position-x: left;
+        background-position-y: bottom;
+        padding-bottom: 150px;
+        padding-top: 50px;
+        background-color: #FAFBFC;
+
+        @media (min-width: $sm) {
+            padding-top: 0;
+        }
+    }
+
+    &--main {
+        background: #FAFBFC;
+    }
+
+    &--blue {
+        background: radial-gradient(77.62% 467.21% at 56.78% 50%, #2C5CB0 0%, #0C347A 100%);
+    }
+
+    &--secondary {
+        background: radial-gradient(61.41% 2272.69% at 30.41% 59.13%, #DF3146 0%, #C81329 100%);
+    }
+
+    &--map {
+        background-color: #F1F1F1;
+        padding-top: 35px;
+        padding-bottom: 35px;
+
+        @media (min-width: $md) {
+            background-image: url('../img/map.png');
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: contain;
+            padding-top: 55px;
+            padding-bottom: 55px;
+        }
+
+        @media (min-width: $lg) {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+
+        @media (min-width: $xl) {
+            padding-top: 180px;
+            padding-bottom: 180px;
+        }
+
+        @media (min-width: $xxl) {
+            padding-top: 250px;
+            padding-bottom: 300px;
+        }
+    }
+
+    &--gray-gradient {
+        background: linear-gradient(180deg, #FFFFFF 0%, #EFF2F7 100%);
+    }
+
+    &--footer {
+        background-color: #16171A;
+
+        padding-top: 25px;
+        padding-bottom: 15px;
+
+        @media (min-width: $lg) {
+            padding-top: 55px;
+            padding-bottom: 35px;
+        }
+    }
+}
