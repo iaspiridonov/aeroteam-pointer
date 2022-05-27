@@ -1,0 +1,19 @@
+.banners {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    &__item {
+        width: 50%;
+        padding: 10px;
+        
+        @media (min-width: $md) {
+            width: 25%;
+        }
+        
+        & img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}

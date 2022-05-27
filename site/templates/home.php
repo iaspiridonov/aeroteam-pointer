@@ -1,44 +1,15 @@
+<?php namespace ProcessWire; ?>
+
 <section class="section--main">
     <div class="main-bg"></div>
     <div class="container">
-        <div class="cta-form">
-            <div class="cta-form__title">
-                Заказ сертификата
-            </div>
-            <div class="cta-form__desc">
-                Дарите подарочные сертификаты на новые потрясающие эмоции Вашим родным и близким!
-            </div>
-            <form  action="/ajax.php" method="POST" class="cta-form__form">
-                <input type='hidden' name='action' value='smallFormZakaz'>
-                <div class="cta-form__container">
-                    <div class="cta-form__item-wrapper">
-                        <select name="cert" class="js-enter-cert">
-                            <option></option>
-                            <option value="Обычный полет">Обычный полет</option>
-                            <option value="Предложение руки и сердца">Предложение руки и сердца</option>
-                            <option value="Прыжок с парашютом">Прыжок с парашютом</option>
-                            <option value="Полет на винодельню">Полет на винодельню</option>
-                        </select>
-                    </div>
-                     <!-- <div class="cta-form__item-wrapper"> -->
-                        <!-- Если нужен input, раскомментировать строку ниже и закомментировать select -->
-                        <!-- <input class="input input--cta" type="time" name="name" placeholder="Имя, фамилия"> -->
-                        <!-- <select name="time" class="js-enter-time">
-                            <option></option>
-                            <option value="1">13:00 - 14:00</option>
-                            <option value="2">14:00 - 15:00</option>
-                        </select>
-                    </div>-->
-                    <input id='prefix' type='hidden' name='prefix' value='+373'>
-                    <div class="cta-form__item-wrapper">
-                        <input class="input input--cta" type="text" name="name" placeholder="Имя, фамилия">
-                    </div>
-                    <div class="cta-form__item-wrapper">
-                        <input class="js-phone" type="text" name="phone" placeholder="Телефон">
-                    </div>
-                </div>
-                <input id='smallFormZakaz' type="submit" value="Заказать" class="button ms-xxl-5 ms-xl-4 ms-xl-3 ms-0 mt-4 mt-xl-0">
-            </form>
+        <div class="banners cta-form">
+        <?php foreach ($home->banners as $banner): ?>
+            <a href="<?= $banner->text_plain ?>" class="banners__item">
+            <?php bd($banner->image) ?>
+                <img src="<?= $banner->image->size(304, 304)->src ?>" alt="<?= $banner->image->description ?>">
+            </a>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
@@ -79,51 +50,6 @@ foreach($home->gallery_after_certificate_form as $h) {
                                     </div>
                                 </div>
                             </div>
-                            <!--div class="swiper-slide">
-                                <div class="weekend-item">
-                                    <div class="weekend-item__img">
-                                        <img src="img/weekend-2.png" alt="weekend">
-                                        <div class="weekend-item__tag weekend-item__tag--popular">Популярное</div>
-                                    </div>
-                                    <div class="weekend-item__text">
-                                        <div class="weekend-item__text-title">Аренда самолета</div>
-                                        <div class="weekend-item__text-desc">Подберем самый лучший вариант частного</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="weekend-item">
-                                    <div class="weekend-item__img">
-                                        <img src="img/weekend-3.png" alt="weekend">
-                                    </div>
-                                    <div class="weekend-item__text">
-                                        <div class="weekend-item__text-title">Аренда самолета</div>
-                                        <div class="weekend-item__text-desc">Подберем самый</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="weekend-item">
-                                    <div class="weekend-item__img">
-                                        <img src="img/weekend-4.png" alt="weekend">
-                                    </div>
-                                    <div class="weekend-item__text">
-                                        <div class="weekend-item__text-title">Аренда самолета</div>
-                                        <div class="weekend-item__text-desc">Подберем самый лучший вариант частного самолета для Вашей поездки.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="weekend-item">
-                                    <div class="weekend-item__img">
-                                        <img src="img/weekend-4.png" alt="weekend">
-                                    </div>
-                                    <div class="weekend-item__text">
-                                        <div class="weekend-item__text-title">Аренда самолета</div>
-                                        <div class="weekend-item__text-desc">Подберем самый лучший вариант частного самолета для Вашей поездки.</div>
-                                    </div>
-                                </div>
-                            </div-->
                         <?php endforeach; ?>
                     </div>
                     </div>
@@ -195,91 +121,6 @@ foreach($home->gallery_after_gift_certificate as $h) {
                     </a>
                 </div>
             <?php endforeach; ?>
-            <!--div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
-                <a href="img/gal-1.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-1.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-1.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-1.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-1.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-1.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-1.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-1.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-1.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-1.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-2.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-2.png" alt="gallery1">
-                </a>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1 d-none d-sm-block">
-                <a href="img/gal-3.png" data-fancybox="gal">
-                    <img class="w-100 h-100 o-moveY" src="img/gal-3.png" alt="gallery1">
-                </a>
-            </div-->
         </div>
         <a class="go__photo">Загрузить ещё</a>
     </div>

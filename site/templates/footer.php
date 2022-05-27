@@ -44,7 +44,7 @@
                 <div class="u-text">
                     Автобусы №130 и №131, едущие в Вадул-луй-Воды, или любой другой автобус или маршрутка, проезжающие через Вадул-луй-Воды. По приезду в Ваду-луй-Воды необходимо будет вызвать такси, которое довезёт Вас непосредственно до аэродрома.
                 </div>
-                <a style="max-width: 150px;display: flex !important;margin-top: 30px;" href="https://www.google.com/maps/place/Aerodrom+Hore%C5%9Fti/@46.839325,28.9106361,13.74z/data=!4m5!3m4!1s0x40c99c630c4477b3:0x132d925b499e739e!8m2!3d46.8333119!4d28.9013493" class="button d-none d-lg-flex">Как добраться</a>
+                <a target="_blank" style="max-width: 150px;display: flex !important;margin-top: 30px;" href="https://www.google.com/maps/place/Aerodrom+Hore%C5%9Fti/@46.839325,28.9106361,13.74z/data=!4m5!3m4!1s0x40c99c630c4477b3:0x132d925b499e739e!8m2!3d46.8333119!4d28.9013493" class="button d-none d-lg-flex">Как добраться</a>
             </div>
         </div>
     </div>

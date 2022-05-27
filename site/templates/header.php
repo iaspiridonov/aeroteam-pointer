@@ -47,7 +47,7 @@ foreach($home->home_contacts as $h) {
 <nav class="navbar navbar-expand-lg sticky-top bg-white">
     <div class="container">
         <a class="navbar-brand order-0" href="/">
-            <img style="width: 83px;height: 78px;object-fit: none;" src="/site/assets/files/1039/logo.svg" alt="logo" loading="lazy">
+            <img src="/site/templates/img/logo.png" alt="logo" loading="lazy">
         </a>
         <div class="collapse navbar-collapse order-3 order-lg-1" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
@@ -61,15 +61,6 @@ foreach($home->home_contacts as $h) {
                         <a class="nav-link<?= $this_page->title == $page->title ? " nav-link--active" : "" ?> "href="/<?= $page->name ?>"><?= $page->title ?></a>
                     </li>
                 <?php endforeach; ?>
-                <!--li class="nav-item">
-                    <a class="nav-link" href="/fly">Полеты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/service">Услуги</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">О нас</a>
-                </li-->
                 <li class="nav-item">
                     <a href="#" class="js-open-modal button d-flex d-lg-none mt-3" data-modal="1">Заказать сертификат</a>
                 </li>
