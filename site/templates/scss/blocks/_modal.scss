@@ -11,6 +11,21 @@
    transition: 0.3s all;
    padding: 15px;
    height: 100%;
+   
+   &__more {
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: underline;
+   }
+   
+   &__options {
+      padding-left: 0;
+      list-style-type: none;
+      
+      & li {
+         font-size: 14px;
+      }
+   }
 
    @media (min-width: $sm) {
       padding: 30px;
@@ -158,13 +173,17 @@
          width: 25% !important;
       }
    }
+   
+   &--w33 {
+      width: 100% !important;
+      
+      @media (min-width: $md) {
+         width: 33.33% !important;
+      }
+   }
 
    &--w100 {
       width: 100% !important;
-
-      @media (min-width: $md) {
-         width: 50% !important;
-      }
    }
 
    @media (min-width: $sm) {

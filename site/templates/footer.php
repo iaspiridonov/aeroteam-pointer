@@ -1,3 +1,49 @@
+    <div class="modal" data-modal="1">
+        <form action="/ajax.php" method="POST">
+            <input type='hidden' name='prefix' value='+373'>
+            <svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg"               viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
+            
+            <div class="modal__title">Заказ сертификата</div>
+            <div class="mb-4">
+                <div class="modal__context">Выберите услугу</div>
+                <div class="modal__bot">
+                    <div class="modal__wrapper modal__wrapper--w100 pe-md-4">
+                        <select name="cert" class="js-enter-item">
+                            <option data-link="/services#jump" value="Прыжок с парашютом">Прыжок с парашютом</option>
+                            <option data-link="/flights" value="Полет на самолете">Полет на самолете</option>
+                            <option data-link="/services#wedding" value="Предложение руки и сердца">Предложение руки и сердца</option>
+                            <option data-link="/services#vine" value="Полет на винодельню">Полет на винодельню</option>
+                        </select>
+                    </div>
+                    <div class="mt-3">
+                        <a href="/services/#jump" class="modal__more js-modal-more">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-5">
+                <div class="modal__context">Контактные данные</div>
+                <div class="modal__bot cta-form__container">
+                    <div class="modal__wrapper pe-sm-4 pe-3">
+                        <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия" required>
+                    </div>
+                    <div class="modal__wrapper">
+                        <input class="js-phone" type="text" name="phone" placeholder="Телефон" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__price-wrapper">
+                <button type="submit" class="button">Заказать</button>
+            </div>
+
+            <div class="modal__info">
+                <svg class="me-3" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path opacity="0.8" d="M8.99935 17.3346C4.39698 17.3346 0.666016 13.6037 0.666016 9.0013C0.666016 4.39893 4.39698 0.667969 8.99935 0.667969C13.6017 0.667969 17.3327 4.39893 17.3327 9.0013C17.3276 13.6016 13.5996 17.3296 8.99935 17.3346ZM8.16602 11.5013V13.168H9.83268V11.5013H8.16602ZM8.16602 4.83464V9.83464H9.83268V4.83464H8.16602Z" fill="#B8BBC0"/>
+                </svg>
+                Ваш сертификат будет годен в течении 3-х месяцев</div>
+        </form>
+    </div>
+    
+
 <section class="section section--secondary">
     <div class="container">
         <div class="row text-center text-sm-start call-form align-items-sm-center">
@@ -9,9 +55,8 @@
                     Мы всегда готовы связавться с Вами
                 </div>
                 <form class="call-form__form" action="/ajax.php" method="POST">
-                    <input type='hidden' name='action' value='consultation'>
-                    <input type="text" name='name' class="input input--call" placeholder="Имя">
-                    <input type="text" name='phone' class="input input--call" placeholder="Телефон">
+                    <input type="text" name='name' class="input input--call" placeholder="Имя" required>
+                    <input type="text" name='phone' class="input input--call" placeholder="Телефон" required>
                     <input type="submit" class="input input__submit-transparent mt-xl-0 mt-4" value="Оставить заявку">
                 </form>
             </div>
@@ -278,105 +323,6 @@
         <img class="w-100" src="/img/spencer.png" alt="spenc">
     </div>
 </section>
-
-<div class="modal" data-modal="1">
-    <svg class="modal__cross js-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
-
-    <div class="modal__title">Заказ сертификата</div>
-    <div class="mb-4">
-        <div class="modal__context">Выберите сертификат и дату полета</div>
-        <div class="modal__bot">
-            <div class="modal__wrapper modal__wrapper--w100 pe-md-4">
-                <select name="cert" id="cert" class="js-enter-item select_first">
-                    <option value="1104">Полет на дельтаплане</option>
-                    <option value="1110">Предложение руки и сердца</option>
-                    <option value="1114">Полет в винодельню Et Cetera</option>
-                    <option value="1118">Прыжок с парашютом</option>
-                    <option value="1122">Gender party</option>
-                    <option value="1126">Аренда самолета</option>
-                </select>
-            </div>
-            <div class="modal__wrapper modal__wrapper--w25">
-                <input type="date" class="input">
-            </div>
-            <div class="modal__wrapper ps-sm-4 ps-3 modal__wrapper--w25">
-            <select name="time" class="js-enter-item">
-                    <option value="1">15 минут</option>
-                    <option value="2">30 минут</option>
-                    <option value="3">45 минут</option>
-                    <option value="4">60 минут</option>
-                </select>
-            </div>
-            <div class="modal__wrapper modal__wrapper--w100 pe-md-4">
-                <select name="air" class="js-enter-item">
-                    <option value="1">Стинг ТЛ 2000</option>
-                    <option value="2">Пипистрел Вайрос</option>
-                    <option value="3">Соката ТБ9</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="mb-5">
-        <div class="modal__context">Контактные данные</div>
-        <div class="modal__bot cta-form__container">
-            <div style="margin-bottom: 1.4rem;" class="modal__wrapper pe-sm-4 pe-3">
-                <input class="input input--cta" type="text" placeholder="Имя, Фамилия">
-            </div>
-            <div style="margin-bottom: 1.4rem;" class="modal__wrapper">
-                <input class="js-phone js-phone-modal" type="text" name="phone" placeholder="Телефон">
-            </div>
-            <div class="service__dop mb-3">
-                            <span class="modal__context mb-2">Дополнительная услуга</span>
-                            <div class="service__dop-item">
-                                <div class="service__dop-block">
-                                    <div>
-                                        <div class="service__dop-name">
-                                            Видеосъемка - 1000 леев
-                                        </div>
-                                        <div class="service__dop-desc">
-                                            Мы снимаем весь полет
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="service__dop-add">
-                                            Добавить
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="service__dop-item">
-                                <div class="service__dop-block">
-                                    <div>
-                                        <div class="service__dop-name">
-                                            Фотосъемка - 500 леев
-                                        </div>
-                                        <div class="service__dop-desc">
-                                            Мы делаем фотографии до полета и после,<br> в течении 20 минут
-                                        </div>
-                                    </div>
-                                    <a href="#" class="service__dop-add">
-                                        Добавить
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-    </div>
-    <div class="modal__price-wrapper">
-        <div>
-            <div class="modal__text">Итого:</div>
-            <div class="modal__price">2500 леев</div>
-        </div>
-        <a href="#" class="button">Заказать</a>
-    </div>
-
-    <div class="modal__info">
-        <svg class="me-3" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path opacity="0.8" d="M8.99935 17.3346C4.39698 17.3346 0.666016 13.6037 0.666016 9.0013C0.666016 4.39893 4.39698 0.667969 8.99935 0.667969C13.6017 0.667969 17.3327 4.39893 17.3327 9.0013C17.3276 13.6016 13.5996 17.3296 8.99935 17.3346ZM8.16602 11.5013V13.168H9.83268V11.5013H8.16602ZM8.16602 4.83464V9.83464H9.83268V4.83464H8.16602Z" fill="#B8BBC0"/>
-        </svg>
-        Ваш сертификат будет годен в течении 3-х месяцев</div>
-
-</div>
 
 <!-- Подложка под модальным окном -->
 <div class="overlay js-overlay-modal"></div>

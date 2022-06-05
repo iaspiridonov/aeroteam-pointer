@@ -117,7 +117,7 @@ foreach($home->gallery_after_gift_certificate as $h) {
             <?php foreach($gallery as $picture): ?>
                 <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-2 px-1">
                     <a style="max-width: 220px;max-height: 220px;width: 100%;height: 100%;" href="<?= $picture->url ?>" data-fancybox="gal">
-                        <img class="w-100 h-100 o-moveY" src="<?= $picture->url ?>" alt="gallery1">
+                        <img style="object-fit: cover;" class="w-100 h-100 o-moveY" src="<?= $picture->url ?>" alt="gallery1">
                     </a>
                 </div>
             <?php endforeach; ?>

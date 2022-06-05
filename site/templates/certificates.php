@@ -173,6 +173,10 @@ function randomStrGenerator($lenOfGenStr) {
       font-size: 14pt;
       margin-bottom: 20px;
   }
+  input[type="submit"] {
+      width: 150px;
+      margin-bottom: 50px;
+  }
   button{
       width: 60%;
       height: 70px;
@@ -224,11 +228,17 @@ function randomStrGenerator($lenOfGenStr) {
       border:1px solid grey;
   }
   .table_container {
+      min-width: 1360px;
+      overflow-x: auto;
       min-height: 500px;
       display: flex;
       flex-direction: column;
       justify-content: start;
       align-items: center;
+  }
+  .table_wrapper {
+      width: 100%;
+      overflow-x: auto;
   }
   .table_header {
       margin-left: 0px;
@@ -335,10 +345,10 @@ function randomStrGenerator($lenOfGenStr) {
     height: 40px
 }
 .search {
-    width: 500px;
+    max-width: 500px;
+    width: calc(100% - 30px);
     background-color: #fff;
     border-radius: 10px;
-    margin-bottom: 50px;
 }
 .search_form {
     display: flex;
@@ -351,131 +361,120 @@ function randomStrGenerator($lenOfGenStr) {
 <h1>Таблица сертификатов<?= $_GET['page'] ? ' - страница ' . $_GET['page'] : '' ?></h1>
 <form class='search_form' action='/certificate-generator/' method='POST'>
     <input type='hidden' name='action' value='findCertificate'>
-    <input class='search' name='find_str' type='text' value="<?= $_GET['cert_code'] ?>" placeholder="Поиск" onchange="find_certificate()">
+    <input class='search' name='find_str' type='text' value="<?= $_GET['cert_code'] ?>" placeholder="Введите код сертификата">
+    <input type="submit" value="Поиск">
 </form>
-<div class='table_container'>
-    <div class='table_header'>
-        <span>#</span>
-        <span>Код Сертификата</span>
-        <span>Цена</span>
-        <span>Дата</span>
-        <span>Комментарий</span>
-        <span>Статус</span>
-        <button class='new_certificate' id='open-modal' <?= $user->hasRole('seller') == false ? 'disabled' : '' ?>>Создать сертификат</button>
-    </div>
-<!--div class='wrap'>
-<div class='table'>
-<table>
-    <tr>
-        <td>#</td>
-        <td>Код Сертификата</td>
-        <td>Цена</td>
-        <td>Дата</td>
-        <td>Статус</td>
-    </tr-->
-
-<?php
-if (!isset ($_GET['page']) ) {  
-    $page = 1;  
-} else {  
-    $page = $_GET['page'];  
-}  
-$page_first_result = ($page-1) * $results_per_page;
-$cert_page = $pages->findOne('template=certificates');
-$cerificates = $cert_page->children();
-
-/*$query = "select * from certificates";  
-$result = mysqli_query($connect, $query);  
-$number_of_result = mysqli_num_rows($result);  
-//var_dump($result);
-//determine the total number of pages available  
-$number_of_page = ceil ($number_of_result / $results_per_page);
-$query = "SELECT * FROM certificates LIMIT " . $page_first_result . ',' . $results_per_page;  
-$result = mysqli_query($connect, $query);  */
-//var_dump($result);
-//display the retrieved result on the webpage 
-$cnt = ($page - 1)  * $results_per_page + 1;
-foreach ($cerificates as $key => $c) {
-    if($_GET['cert_code']) {
-        if(strpos($c->title, $_GET['cert_code']) === false) {
-            continue;
-        }
-    }
-    if($c->status == 2) {
-        $status = 'Использован';
-    }  elseif($c->status == 3) {
-        $status = 'Продлен';
-    }
-    else {
-        $status = 'Не использован';
-    } ?>
-    <div class='table_block'>
-        <span><?= $cnt ?></span>
-        <span><?= $c->title ?></span>
-        <span><?= $c->price ?></span>
-        <span><?= $c->date ?></span>
-        <span><button class="button_change" onclick="watch_comment('<?= $c->title ?>')">Посмотреть</button></span>
-        <span class="status" data-status="<?= $c->status?>" id="<?= $row['id'] ?>"><?= $status ?></span>
-        <button class="button_change" onclick="change_certificate('<?= $c->title ?>')" <?= $user->hasRole('aeroteam_admin') == false ? 'disabled' : '' ?>>Изменить</button>
-        <form class='form' id='form<?= $c->title ?>' action='/certificate-generator/' method='POST'>
-        <input type='hidden' name='action' value='deleteCertificate'>
-        <input type='hidden' name='cert_code' value='<?= $c->title ?>'></form>
-        <button class="button_delete" id='delete<?= $c->title ?>' onclick="delete_certificate('<?= $c->title ?>')" <?= $user->hasRole('aeroteam_admin') == false ? 'disabled' : '' ?>>Удалить</button>
-    </div>
-    <div class="block-popup" id="<?= $c->title ?>">
-    <form class='form' action='/certificate-generator/' method='POST'>
-            <h2>Изменить сертификат</h2>
-            <input type='hidden' name='action' value='changeCertificate'>
-            <input type='hidden' name='cert_code' value='<?= $c->title ?>'>
-            <div>
-            <h3>Стоимость сертификата</h3>
-            <input type='number' id='price' name='price' value='<?= $c->price ?>' require>
-            </div>
-            <div>
-            <h3>Комментарий</h3>
-            <textarea rows="5" cols="38" name="comment"><?= $c->comment ?></textarea>
-            </div>
-            <div>
-            <h3>Статус</h3>
-            <select class='select_status' name='status'>
-                <option value=1 <?= $row['status'] == 1 ? 'selected' : '' ?>>Не использован</option>
-                <option value=2 <?= $row['status'] == 2 ? 'selected' : '' ?>>Использован</option>
-                <option value=3 <?= $row['status'] == 3 ? 'selected' : '' ?>>Продлен</option>
-            </select>
-            </div>
-            <button class='form_submit' type='submit'>Сохранить</button>
-        </form>
-    <span style='min-width:0px !important'>&times;</span>
-    </div>
-    <div class="overlay1"></div>
-    <div class="block-popup" id="comment_<?= $c->title ?>">
-        <h3>Комментарий</h3>
-        <p><?= $c->comment ?></p>
-    <span style='min-width:0px !important'>&times;</span>
-    </div>
-    <div class="overlay1"></div>
-    <?php
-    //echo '<tr><td>' . $cnt . '</td><td>' . $row['code'] . '</td><td>' . $row['price'] . '</td><td>' . date("d.m.Y",$row['date']) 
-    //. '</td><td><div class="status" data-status="' . $row['status'] . '" id="' . $row['id'] . '">' . $status . '</div></td></tr>'; 
-    $cnt++; 
-}  
-?>
-</div> 
-
-<!--/table>
-</div>
-<div class='certificate'>
-    <form class='form' action='certificate-generator.php' method='POST'>
-        <h2>Сгенерировать сертификат</h2>
-        <input type='hidden' name='action' value='createCertificate'>
-        <div>
-        <h3>Стоимость сертификата</h3>
-        <input type='number' id='price' name='price' value=''>
+<div class="table_wrapper">
+    <div class='table_container'>
+        <div class='table_header'>
+            <span>#</span>
+            <span>Код Сертификата</span>
+            <span>Цена</span>
+            <span>Дата</span>
+            <span>Комментарий</span>
+            <span>Статус</span>
+            <button class='new_certificate' id='open-modal' <?= $user->hasRole('seller') == false ? 'disabled' : '' ?>>Создать сертификат</button>
         </div>
-        <button type='submit'>Создать</button>
-    </form>
+    <!--div class='wrap'>
+    <div class='table'>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Код Сертификата</td>
+            <td>Цена</td>
+            <td>Дата</td>
+            <td>Статус</td>
+        </tr-->
+
+    <?php
+    if (!isset ($_GET['page']) ) {  
+        $page = 1;  
+    } else {  
+        $page = $_GET['page'];  
+    }  
+    $page_first_result = ($page-1) * $results_per_page;
+    $cert_page = $pages->findOne('template=certificates');
+    $cerificates = $cert_page->children();
+
+    /*$query = "select * from certificates";  
+    $result = mysqli_query($connect, $query);  
+    $number_of_result = mysqli_num_rows($result);  
+    //var_dump($result);
+    //determine the total number of pages available  
+    $number_of_page = ceil ($number_of_result / $results_per_page);
+    $query = "SELECT * FROM certificates LIMIT " . $page_first_result . ',' . $results_per_page;  
+    $result = mysqli_query($connect, $query);  */
+    //var_dump($result);
+    //display the retrieved result on the webpage 
+    $cnt = ($page - 1)  * $results_per_page + 1;
+    foreach ($cerificates as $key => $c) {
+        if($_GET['cert_code']) {
+            if(strpos($c->title, $_GET['cert_code']) === false) {
+                continue;
+            }
+        }
+        if($c->status == 2) {
+            $status = 'Использован';
+        }  elseif($c->status == 3) {
+            $status = 'Продлен';
+        }
+        else {
+            $status = 'Не использован';
+        } ?>
+        <div class='table_block'>
+            <span><?= $cnt ?></span>
+            <span><?= $c->title ?></span>
+            <span><?= $c->price ?></span>
+            <span><?= $c->date ?></span>
+            <span><button class="button_change" onclick="watch_comment('<?= $c->title ?>')">Посмотреть</button></span>
+            <span class="status" data-status="<?= $c->status?>" id="<?= $row['id'] ?>"><?= $status ?></span>
+            <button class="button_change" onclick="change_certificate('<?= $c->title ?>')" <?= $user->hasRole('aeroteam_admin') == false ? 'disabled' : '' ?>>Изменить</button>
+            <form class='form' id='form<?= $c->title ?>' action='/certificate-generator/' method='POST'>
+            <input type='hidden' name='action' value='deleteCertificate'>
+            <input type='hidden' name='cert_code' value='<?= $c->title ?>'></form>
+            <button class="button_delete" id='delete<?= $c->title ?>' onclick="delete_certificate('<?= $c->title ?>')" <?= $user->hasRole('aeroteam_admin') == false ? 'disabled' : '' ?>>Удалить</button>
+        </div>
+        <div class="block-popup" id="<?= $c->title ?>">
+        <form class='form' action='/certificate-generator/' method='POST'>
+                <h2>Изменить сертификат</h2>
+                <input type='hidden' name='action' value='changeCertificate'>
+                <input type='hidden' name='cert_code' value='<?= $c->title ?>'>
+                <div>
+                <h3>Стоимость сертификата</h3>
+                <input type='number' id='price' name='price' value='<?= $c->price ?>' require>
+                </div>
+                <div>
+                <h3>Комментарий</h3>
+                <textarea rows="5" cols="38" name="comment"><?= $c->comment ?></textarea>
+                </div>
+                <div>
+                <h3>Статус</h3>
+                <select class='select_status' name='status'>
+                    <option value=1 <?= $row['status'] == 1 ? 'selected' : '' ?>>Не использован</option>
+                    <option value=2 <?= $row['status'] == 2 ? 'selected' : '' ?>>Использован</option>
+                    <option value=3 <?= $row['status'] == 3 ? 'selected' : '' ?>>Продлен</option>
+                </select>
+                </div>
+                <button class='form_submit' type='submit'>Сохранить</button>
+            </form>
+        <span style='min-width:0px !important'>&times;</span>
+        </div>
+        <div class="overlay1"></div>
+        <div class="block-popup" id="comment_<?= $c->title ?>">
+            <h3>Комментарий</h3>
+            <p><?= $c->comment ?></p>
+        <span style='min-width:0px !important'>&times;</span>
+        </div>
+        <div class="overlay1"></div>
+        <?php
+        //echo '<tr><td>' . $cnt . '</td><td>' . $row['code'] . '</td><td>' . $row['price'] . '</td><td>' . date("d.m.Y",$row['date']) 
+        //. '</td><td><div class="status" data-status="' . $row['status'] . '" id="' . $row['id'] . '">' . $status . '</div></td></tr>'; 
+        $cnt++; 
+    }  
+    ?>
+    </div> 
 </div>
-</div-->
+
 <div class="block-popup" id="generator">
   <form class='form' action='/certificate-generator/' method='POST'>
         <h2>Сгенерировать сертификат</h2>
@@ -521,22 +520,13 @@ foreach ($cerificates as $key => $c) {
         find_str = $('.search').val();
         window.location.replace("/certificate-generator/?cert_code=" + find_str);
     }
+    
+    $('.search_form').submit(function (e) { 
+        e.preventDefault();
+        
+        find_certificate();
+    });
     $(document).ready(function() {
-        /*$('.status').click(function() {
-            $.ajax({
-                type: "POST",
-                url: 'certificate-generator.php',
-                data: {'certId':$(this).attr('id'),'action':'changeStatus','status':$(this).attr('data-status')},
-                success: function(answer) {
-                //console.log(answer);
-                location.reload()
-                },
-                error: function (error) {
-                alert('попробуйте еще раз');
-                console.log(error);
-                }
-            });
-        });*/
         $('#open-modal').on('click', function(){
             $('.block-popup, .overlay1').fadeIn();
         })

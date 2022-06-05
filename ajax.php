@@ -1,45 +1,79 @@
 <?php
 define('TOKEN', '5377865435:AAGZksNgbWapY2DF9nCVSF0yeulIi_CPZhQ'); 
-if($_POST['action'] == 'smallFormZakaz') {
-    $to      = 'aeroteam@pointer.global';
-    $subject = 'Заказ сертификата';
-    $message = '<html><body><strong>Сертификат</strong>: ' . $_POST['cert'] . '<br /><strong>Имя, Фамилия</strong>: ' . $_POST['name'] . '<br /><strong>Телефон</strong>:' . $_POST['prefix'] . $_POST['phone'] . '</body></html>';
-    $headers = 'From: robot@aeroteam.pointer.global' . "\r\n" .
-        'Content-type: text/html; charset=utf-8\r\n' .
-        'X-Mailer: PHP mail script';
+$chatId = '-723428456';
 
-    mail($to, $subject, $message, $headers);
-    $method = 'sendMessage';
-	$send_data = [ 
-			'text' => "**Заказ сертификата** \nСертификат: " . $_POST['cert'] . " \nИмя, Фамилия: " . $_POST['name'] . " \nТелефон: " . $_POST['prefix'] . $_POST['phone'],
-			];
-$send_data['chat_id'] = '-723428456';
+// Common
+$cert       = $_POST['cert'];
+$address    = $_POST['address'];
+
+// Fly
+$price      = $_POST['price'];
+$flyName    = $_POST['fly-name'];
+$addi1      = $_POST['addi1'];
+$addi2      = $_POST['addi2'];
+$duration   = $_POST['duration'];
+$aeroplane  = $_POST['aeroplane'];
+$currency   = $_POST['currency'] ?? 'леев';
+$passengers = $_POST['passengers'];
+
+$to      = 'aeroteam@pointer.global';
+$subject = 'Заяка с сайта AeroTeam';
+$message = '<html><body><strong>Имя</strong>: ' . $_POST['name'] . '<br /><strong>Телефон</strong>:' . $_POST['phone'] . '</body></html>';
+$headers = 'From: robot@aeroteam.pointer.global' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+$method = 'sendMessage';
+$tgMess = "**Заяка с сайта AeroTeam**:";
+$tgMess .= "\nИмя: {$_POST['name']}";
+$tgMess .= "\nТелефон: {$_POST['prefix']}" . "{$_POST['phone']}";
+
+if ($address) {
+    $tgMess .= "\n Адрес доставки: {$address}";
+}
+
+if ($cert) {
+    $tgMess .= "\n Сертификат: {$cert}";
+}
+
+if ($flyName) {
+    $tgMess .= "\n {$flyName}";
+}
+
+if ($passengers) {
+    $tgMess .= "\n Пассажиров: {$passengers}";
+}
+
+if ($aeroplane) {
+    $tgMess .= "\n Самолет: {$aeroplane}";
+}
+
+if ($duration) {
+    $tgMess .= "\n Длительность: {$duration} минут";
+}
+
+if ($addi1) {
+    $tgMess .= "\n {$addi1}";
+}
+
+if ($addi2) {
+    $tgMess .= "\n {$addi2}";
+}
+
+if ($price) {
+    $tgMess .= "\n Итоговая цена: {$price} " . $currency;
+}
+
+$send_data = [ 
+        'text' => $tgMess,
+        'parse_mode' => 'markdown'
+        ];
+$send_data['chat_id'] = $chatId;
 
 $res = sendTelegram($method, $send_data);
-    //$r=sendTelegram('sendMessage', array('chat_id' => '-723428456', 'text' => $message), '5377865435:AAGZksNgbWapY2DF9nCVSF0yeulIi_CPZhQ')
-    header('Location: /?form_success=1');
-    die;
-}
-if($_POST['action'] == 'consultation') {
-    $to      = 'aeroteam@pointer.global';
-    $subject = 'Заяка на получение консультации';
-    $message = '<html><body><strong>Имя</strong>: ' . $_POST['name'] . '<br /><strong>Телефон</strong>:' . $_POST['phone'] . '</body></html>';
-    $headers = 'From: robot@aeroteam.pointer.global' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
-    mail($to, $subject, $message, $headers);
-    $method = 'sendMessage';
-	$send_data = [ 
-			'text' => "**Заявка на получение консультации для**: \nИмя: " . $_POST['name'] . " \nТелефон: " . $_POST['prefix'] . $_POST['phone'],
-			'parse_mode' => 'markdown'
-            ];
-$send_data['chat_id'] = '-723428456';
-
-$res = sendTelegram($method, $send_data);
-    //$r=sendTelegram('sendMessage', array('chat_id' => '-723428456', 'text' => $message), '5377865435:AAGZksNgbWapY2DF9nCVSF0yeulIi_CPZhQ')
-    header('Location: /?form_success=1');
-    die;
-}
+header('Location: /?form_success=1');
+die;
 
 function sendTelegram($method, $data, $headers = [])
 {
