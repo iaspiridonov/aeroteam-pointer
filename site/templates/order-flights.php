@@ -258,7 +258,7 @@ width: 580px;
                 <div class="call-form__desc mb-4">
                   
                 </div>
-                    <input type="text" name="phone" class="input input--call" placeholder="Телефон" required>
+                    <input type="text" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" maxlength="10" class="input input--call" placeholder="Телефон" required>
                     <input type="submit" class="input input__submit-transparent mt-xl-0 mt-4" value="Заказать">
                 </form>
             </div>

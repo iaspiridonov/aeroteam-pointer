@@ -162,17 +162,17 @@
     <section class="section py-3 pb-5">
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4 mb-3">
                     <a href="/services#wedding">
                         <img class="w-100" src="/site/assets/files/1184/bann-3.svg" alt="sokata">
                     </a>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4 mb-3">
                     <a href="/services#jump">
                         <img class="w-100" src="/site/assets/files/1185/bann-4.svg" alt="sokata">
                     </a>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4 mb-3">
                     <a href="/services#vine">
                         <img class="w-100" src="/site/assets/files/1186/bann-2.svg" alt="sokata">
                     </a>
@@ -207,7 +207,7 @@
                         <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия" required>
                     </div>
                     <div class="modal__wrapper modal__wrapper--w33 pe-md-3">
-                        <input class="js-phone" type="text" name="phone" placeholder="Телефон" required>
+                        <input class="js-phone" type="text" maxlength="10" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" placeholder="Телефон" required>
                     </div>
                     <div class="modal__wrapper modal__wrapper--w33">
                         <input class="input input--cta" type="text" name="address" placeholder="Адрес доставки">

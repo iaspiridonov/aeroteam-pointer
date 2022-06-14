@@ -1,5 +1,11 @@
 .cta-form {
-    transform: translateY(-70px);
+    margin-top: 30px;
+    transform: translateY(-50px);
+        
+    @media (min-width: $xl) {
+        margin-top: 0;
+        transform: translateY(-130px);
+    }
 
     &__form {
         flex-wrap: wrap;

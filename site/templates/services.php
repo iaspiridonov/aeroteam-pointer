@@ -373,20 +373,20 @@
     </div>
 </section>
 
-<section class="section mt-5 py-3 pb-5">
+<section class="section mt-sm-5 mt-3 py-3 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-4 mb-3">
                 <a href="/flights#sting">
                     <img class="w-100" src="/site/templates/img/sting.jpg" alt="sokata">
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-md-4 mb-3">
                 <a href="/flights#pipistrel">
                     <img class="w-100" src="/site/templates/img/pipistrel.jpg" alt="sokata">
                 </a>
             </div>
-            <div class="col-4">
+            <div class="col-md-4 mb-3">
                 <a href="/flights#sokata">
                     <img class="w-100" src="/site/templates/img/sokata.jpg" alt="sokata">
                 </a>
@@ -427,7 +427,7 @@
                     <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия">
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33 pe-md-3">
-                    <input class="js-phone" type="text" name="phone" placeholder="Телефон">
+                    <input class="js-phone" type="text" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" maxlength="10" placeholder="Телефон">
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33">
                     <input class="input input--cta" type="text" name="address" placeholder="Адрес доставки">
@@ -475,7 +475,7 @@
                     <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия" required>
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33 pe-md-3">
-                    <input class="js-phone2" type="text" name="phone" placeholder="Телефон" required>
+                    <input class="js-phone2" type="text" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" maxlength="10" placeholder="Телефон" required>
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33">
                     <input class="input input--cta" type="text" name="address" placeholder="Адрес доставки">
@@ -523,7 +523,7 @@
                     <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия" required>
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33 pe-md-3">
-                    <input class="js-phone3" type="text" name="phone" placeholder="Телефон" required>
+                    <input class="js-phone3" type="text" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" maxlength="10" placeholder="Телефон" required>
                 </div>
                 <div class="modal__wrapper modal__wrapper--w33">
                     <input class="input input--cta" type="text" name="address" placeholder="Адрес доставки">

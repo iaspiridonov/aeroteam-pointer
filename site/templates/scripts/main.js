@@ -258,6 +258,11 @@ $(document).ready(function() {
     // init international phones
     var input = document.querySelector(".js-phone");
     if (input) {
+        let that = $(input).eq(0);
+        console.log(that.val());
+        console.log(input);
+        
+        that.val(that.val().replace (/\D/, ''));
         window.intlTelInput(input, {
             initialCountry: "md",
             preferredCountries: [
@@ -269,6 +274,13 @@ $(document).ready(function() {
             ],
             customContainer: "js-international-phone",
             separateDialCode: true
+        });
+        
+        
+        // Insert value to the input name = 'prefix'
+        input.addEventListener("countrychange", function() {
+            let prefix = $('.iti__selected-dial-code').eq(1).text();
+            $('input[name="prefix"]').attr('value', prefix);
         });
     }
     
@@ -286,6 +298,12 @@ $(document).ready(function() {
             customContainer: "js-international-phone",
             separateDialCode: true
         });
+        
+        // Insert value to the input name = 'prefix'
+        input2.addEventListener("countrychange", function() {
+            let prefix = $('.iti__selected-dial-code').eq(1).text();
+            $('input[name="prefix"]').attr('value', prefix);
+        });
     }
     
     var input3 = document.querySelector(".js-phone3");
@@ -302,25 +320,14 @@ $(document).ready(function() {
             customContainer: "js-international-phone",
             separateDialCode: true
         });
+        
+        // Insert value to the input name = 'prefix'
+        input3.addEventListener("countrychange", function() {
+            let prefix = $('.iti__selected-dial-code').eq(1).text();
+            $('input[name="prefix"]').attr('value', prefix);
+        });
     }
     
-    // Insert value to the input name = 'prefix'
-    input.addEventListener("countrychange", function() {
-        let prefix = $('.iti__selected-dial-code').eq(1).text();
-        $('input[name="prefix"]').attr('value', prefix);
-    });
-    
-    // Insert value to the input name = 'prefix'
-    input2.addEventListener("countrychange", function() {
-        let prefix = $('.iti__selected-dial-code').eq(1).text();
-        $('input[name="prefix"]').attr('value', prefix);
-    });
-    
-    // Insert value to the input name = 'prefix'
-    input3.addEventListener("countrychange", function() {
-        let prefix = $('.iti__selected-dial-code').eq(1).text();
-        $('input[name="prefix"]').attr('value', prefix);
-    });
 
     // init swiperjs
     const swiper = new Swiper('.js-swiper-weekend', {

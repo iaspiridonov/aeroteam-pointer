@@ -27,7 +27,7 @@
                         <input class="input input--cta" name="name" type="text" placeholder="Имя, Фамилия" required>
                     </div>
                     <div class="modal__wrapper">
-                        <input class="js-phone" type="text" name="phone" placeholder="Телефон" required>
+                        <input class="js-phone" type="text" maxlength="10" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" placeholder="Телефон" required>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 </div>
                 <form class="call-form__form" action="/ajax.php" method="POST">
                     <input type="text" name='name' class="input input--call" placeholder="Имя" required>
-                    <input type="text" name='phone' class="input input--call" placeholder="Телефон" required>
+                    <input type="text" name="phone" onkeyup="this.value = this.value.replace (/\D/, '')" maxlength="10" class="input input--call" placeholder="Телефон" required>
                     <input type="submit" class="input input__submit-transparent mt-xl-0 mt-4" value="Оставить заявку">
                 </form>
             </div>
@@ -80,7 +80,7 @@
             <div style="max-height: 500px;height: 100%;" class="col-12 d-md-none d-block mt-4 map-wrapper">
                 <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab626dee902067cadc40688307eb44996d1e6de8cd81937a17dfdb058f6f7b450&amp;max-width=566&amp;max-height=505&amp;lang=ru_RU&amp;scroll=true"></script>
             </div>
-                <div class="u-h1 mb-4">
+                <div class="u-h1 mb-4 mt-4">
                     Как добраться?
                 </div>
                 <div class="u-text mb-4">
