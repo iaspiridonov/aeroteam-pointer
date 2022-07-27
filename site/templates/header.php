@@ -2,6 +2,7 @@
 setlocale(LC_ALL, 'ru_RU', 'ru_RU.UTF-8', 'ru', 'russian');
 $template = $page->template();
 $this_page = $pages->findOne("template={$template}");
+$this_language = $user->language;
 if($template == 'home') {
     $home = $this_page;
 } else {
@@ -53,13 +54,13 @@ foreach($home->home_contacts as $h) {
         <div class="collapse navbar-collapse order-3 order-lg-1" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link<?= $this_page->title == $home->title ? " nav-link--active" : "" ?>" href="/"><?= $home->title ?></a>
+                    <a class="nav-link<?= $this_page->title == $home->title ? " nav-link--active" : "" ?>" href="<?= $home->localPath($this_language); ?>"><?= $home->title ?></a>
                 </li>
                 <?php foreach($home->children() as $page): ?>
                     <?php if($page->template == 'certificates' && $user->name == 'guest') {?>
                     <?php continue; }?>
                     <li class="nav-item">
-                        <a class="nav-link<?= $this_page->title == $page->title ? " nav-link--active" : "" ?> "href="/<?= $page->name ?>"><?= $page->title ?></a>
+                        <a class="nav-link<?= $this_page->title == $page->title ? " nav-link--active" : "" ?> "href="<?= $page->localPath($this_language); ?>"><?= $page->title ?></a>
                     </li>
                 <?php endforeach; ?>
                 <li class="nav-item">
@@ -79,5 +80,14 @@ foreach($home->home_contacts as $h) {
             </a>
             <a href="#" class="button d-none d-lg-flex js-open-modal" data-modal="1">Заказать сертификат</a>
         </div>
+        <!--@TODO-->
+        <div class='flag-block' style='margin-left: 30px; display:flex; justify-content:space-around; order:4;'>
+            <?php foreach($languages as $language): ?>
+                <div class='flag-block-element' style='margin-right: 20px;'>
+                    <a href="<?= $this_page->localPath($language); ?>"><img style='width:30px; height:22px;' src='/img/country_flags/<?= $language->name ?>.jpg'></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <!--*****-->
     </div>
 </nav>
